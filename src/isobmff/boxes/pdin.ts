@@ -1,0 +1,3 @@
+/**
+ * Progressive Download Information Box
+ */
