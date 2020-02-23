@@ -1,6 +1,6 @@
 import { IBox, byteToString, stringifyBox, parseFullBox } from "./box";
 
-export interface Ihdlr extends IBox {
+export interface IHDLR extends IBox {
     handlerType: string;             // 32 bit unsigned
     name: string;
 }
@@ -11,7 +11,7 @@ export interface Ihdlr extends IBox {
  *
  * Handler Reference Box
  */
-export class hdlr implements Ihdlr {
+export class HDLR implements IHDLR {
 
     public static TYPE: string = "hdlr";
     public static CHILDREN: string[] = [];
@@ -44,7 +44,7 @@ export class hdlr implements Ihdlr {
         //3 reserved 32 bit
         byteOffset += 12;
 
-        let str = ""
+        let str = "";
         const start = dv.byteOffset + byteOffset;
         const end = dv.byteOffset + this.size - 1;
         const temp = new DataView(dv.buffer.slice(start, end)); 
@@ -58,12 +58,12 @@ export class hdlr implements Ihdlr {
 
     public toString(detail: boolean = false): string {
         if (detail) {
-            return `${hdlr.TYPE}: ${stringifyBox(this)}`;
+            return `${HDLR.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${hdlr.TYPE}`;
+        return `${HDLR.TYPE}`;
     }
 
     public static containsBox(box: string): boolean {
-        return hdlr.CHILDREN.indexOf(box) !== -1;
+        return HDLR.CHILDREN.indexOf(box) !== -1;
     }
 }

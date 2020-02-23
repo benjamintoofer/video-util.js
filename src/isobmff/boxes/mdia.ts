@@ -1,9 +1,9 @@
 import { IBox, stringifyBox } from "./box";
-import { mdhd } from "./mdhd";
-import { hdlr } from "./hdlr";
-import { minf } from "./minf";
+import { MDHD } from "./MDHD";
+import { HDLR } from "./HDLR";
+import { MINF } from "./MINF";
 
-export interface Imdia extends IBox {}
+export interface IMDIA extends IBox {}
 
 /**
  * ISO/IEC 14496-12:2012
@@ -11,13 +11,13 @@ export interface Imdia extends IBox {}
  *
  * Media Box
  */
-export class mdia implements Imdia {
+export class MDIA implements IMDIA{
 
     public static TYPE: string = "mdia";
     public static CHILDREN: string[] = [
-        mdhd.TYPE,
-        hdlr.TYPE,
-        minf.TYPE,
+        MDHD.TYPE,
+        HDLR.TYPE,
+        MINF.TYPE,
     ];
 
     public type: string;
@@ -34,8 +34,8 @@ export class mdia implements Imdia {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${mdia.TYPE}: ${stringifyBox(this)}`;
+            return `${MDIA.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${mdia.TYPE}`;
+        return `${MDIA.TYPE}`;
     }
 }

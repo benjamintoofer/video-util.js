@@ -1,6 +1,6 @@
 import { IBox, stringifyBox } from "./box";
 
-export interface Idinf extends IBox { }
+export interface IDINF extends IBox { }
 
 /**
  * ISO/IEC 14496-12:2012
@@ -8,7 +8,7 @@ export interface Idinf extends IBox { }
  *
  * Data Information Box
  */
-export class dinf implements Idinf {
+export class DINF implements IDINF{
 
     public static TYPE: string = "dinf";
     public static CHILDREN: string[] = [
@@ -29,8 +29,8 @@ export class dinf implements Idinf {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${dinf.TYPE}: ${stringifyBox(this)}`;
+            return `${DINF.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${dinf.TYPE}`;
+        return `${DINF.TYPE}`;
     }
 }

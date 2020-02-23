@@ -1,9 +1,9 @@
 import { IBox, stringifyBox } from "./box";
-import { edts } from "./edts";
-import { tkhd } from "./tkhd";
-import { mdia } from "./mdia";
+import { EDTS } from "./EDTS";
+import { TKHD } from "./TKHD";
+import { MDIA} from "./mdia";
 
-export interface Itrak extends IBox {
+export interface ITRAK extends IBox {
 
 }
 
@@ -13,15 +13,15 @@ export interface Itrak extends IBox {
  *
  * Track Box
  */
-export class trak implements Itrak {
+export class TRAK implements ITRAK {
 
     public static TYPE: string = "trak";
     public static CHILDREN: string[] = [
-      tkhd.TYPE,
+      TKHD.TYPE,
       // tref
       // trgr
-      mdia.TYPE,
-      edts.TYPE,
+      MDIA.TYPE,
+      EDTS.TYPE,
     ];
 
     public type: string;
@@ -38,8 +38,8 @@ export class trak implements Itrak {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${trak.TYPE}: ${stringifyBox(this)}`;
+            return `${TRAK.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${trak.TYPE}`;
+        return `${TRAK.TYPE}`;
     }
 }

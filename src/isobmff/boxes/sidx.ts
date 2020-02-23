@@ -1,20 +1,20 @@
 import { IBox, IFullBox, parseFullBox, getUint53, stringifyBox } from "./box";
 
 interface IReference {
-    referenceType: number                  // 1 bit
-    referenceSize: number                   // 31 bit unsigned
-    subSegmentDuration: number              // 32 bit unsigned
+    referenceType: number;                  // 1 bit
+    referenceSize: number;                   // 31 bit unsigned
+    subSegmentDuration: number;              // 32 bit unsigned
     startsWithSAP: number;                 // 1 bit
     SAPType: number;                        // 3 bit unsigned
     SAPDeltaTime: number;                   // 28 bit unsigned
 }
 
-export interface Isidx extends IFullBox {
+export interface ISIDX extends IFullBox {
     referenceID: number;                    // 32 bit unsigned
     timescale: number;                      // 32 bit unsigned
-    earliestPresentationTime: number        // 32 bit unsigned or 64 bit unsigned
-    firstOffset: number                     // 32 bit unsigned or 64 bit unsigned
-    referenceCount: number                  // 16 bit unsigned
+    earliestPresentationTime: number;        // 32 bit unsigned or 64 bit unsigned
+    firstOffset: number;                     // 32 bit unsigned or 64 bit unsigned
+    referenceCount: number;                  // 16 bit unsigned
     references: IReference[];
 
 
@@ -26,7 +26,7 @@ export interface Isidx extends IFullBox {
  *
  * Segment Index Box
  */
-export class sidx implements Isidx {
+export class SIDX implements ISIDX {
 
     public static TYPE: string = "sidx";
     public static CHILDREN: string[] = [];
@@ -104,8 +104,8 @@ export class sidx implements Isidx {
     
     public toString(detail: boolean): string {
         if (detail) {
-            return `${sidx.TYPE}: ${stringifyBox(this)}`;
+            return `${SIDX.TYPE}: ${stringifyBox(this)}`;
         }
-        return sidx.TYPE;
+        return SIDX.TYPE;
     }
 }

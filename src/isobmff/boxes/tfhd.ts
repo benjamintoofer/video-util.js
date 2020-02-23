@@ -31,12 +31,12 @@ const enum tf_flags {
     /**
      * Required from iso5 and on. If BASE_DATA_OFFSET_PRESENT, DEFAULT_BASE_IS_MOOF will
      * be set to indicate base-data-offset for this track fragment is the position of the 
-     * first byte of the enclosing Movie Fragment Box (moof)
+     * first byte of the enclosing Movie Fragment Box (MOOF)
      */
     DEFAULT_BASE_IS_MOOF =              0x020000,   
 }
 
- export interface Itfhd extends IFullBox {
+ export interface ITFHD extends IFullBox {
      trackID: number;                   // 32 bit unsigned
      // Optional Fields
      baseDataOffset?: number;           // 64 bit unsigned
@@ -48,7 +48,7 @@ const enum tf_flags {
      defaultBaseIfMoof?: boolean;      
  }
 
- export class tfhd implements Itfhd {
+ export class TFHD implements ITFHD {
      
     public static TYPE: string ="tfhd";
     public static CHILDREN: string[] = [];
@@ -120,9 +120,9 @@ const enum tf_flags {
 
      public toString(detail: boolean): string {
         if (detail) {
-            return `${tfhd.TYPE}: ${stringifyBox(this)}`;
+            return `${TFHD.TYPE}: ${stringifyBox(this)}`;
         }
-        return tfhd.TYPE;
+        return TFHD.TYPE;
      }
  }
 

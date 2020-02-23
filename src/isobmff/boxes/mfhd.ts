@@ -1,7 +1,7 @@
 import { IBox, parseFullBox, IFullBox, stringifyBox } from "./box";
 
-export interface Imfhd extends IFullBox {
-    sequenceNumber: number      // 32 bit unsigned
+export interface IMFHD extends IFullBox {
+    sequenceNumber: number;      // 32 bit unsigned
 }
 
 /**
@@ -13,7 +13,7 @@ export interface Imfhd extends IFullBox {
  * they occur. This allows readers to verify integrity of the sequence; it is an error to construct
  * a file where the fragments are out of sequence.
  */
-export class mfhd implements Imfhd {
+export class MFHD implements IMFHD {
 
     public static TYPE: string = "mfhd";
     public static CHILDREN: string[] = [];
@@ -36,11 +36,11 @@ export class mfhd implements Imfhd {
 
         this.getAbsoluteOffset = box.getAbsoluteOffset.bind(box);
 
-        let byteOffset = 12;
+        const byteOffset = 12;
         this.sequenceNumber = dv.getUint32(byteOffset);
     }
 
     public toString(_detail: boolean): string {
-        return `${mfhd.TYPE}: ${stringifyBox(this)}`
+        return `${MFHD.TYPE}: ${stringifyBox(this)}`;
     }
 }

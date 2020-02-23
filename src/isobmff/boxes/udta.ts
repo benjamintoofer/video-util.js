@@ -1,6 +1,6 @@
 import { IBox, stringifyBox } from "./box";
 
-export interface Iudta extends IBox { }
+export interface IUDTA extends IBox { }
 
 /**
  * ISO/IEC 14496-12:2012
@@ -8,7 +8,7 @@ export interface Iudta extends IBox { }
  *
  * User Data Box
  */
-export class udta implements Iudta {
+export class UDTA implements IUDTA {
 
     public static TYPE: string = "udta";
     public static CHILDREN: string[] = [
@@ -29,8 +29,8 @@ export class udta implements Iudta {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${udta.TYPE}: ${stringifyBox(this)}`;
+            return `${UDTA.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${udta.TYPE}`;
+        return `${UDTA.TYPE}`;
     }
 }

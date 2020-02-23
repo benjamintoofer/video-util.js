@@ -1,6 +1,6 @@
 import { IBox, stringifyBox } from "./box";
 
-export interface Istbl extends IBox { }
+export interface ISTBL extends IBox { }
 
 /**
  * ISO/IEC 14496-12:2012
@@ -8,7 +8,7 @@ export interface Istbl extends IBox { }
  *
  * 
  */
-export class stbl implements Istbl {
+export class STBL implements ISTBL {
 
     public static TYPE: string = "stbl";
     public static CHILDREN: string[] = [
@@ -29,8 +29,8 @@ export class stbl implements Istbl {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${stbl.TYPE}: ${stringifyBox(this)}`;
+            return `${STBL.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${stbl.TYPE}`;
+        return `${STBL.TYPE}`;
     }
 }

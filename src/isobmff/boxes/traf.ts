@@ -1,10 +1,10 @@
 
 import { IBox, stringifyBox } from "./box";
-import { tfhd } from "./tfhd";
-import { trun } from "./trun";
-import { tfdt } from "./tfdt";
+import { TFHD } from "./TFHD";
+import { TRUN } from "./TRUN";
+import { TFDT } from "./TFDT";
 
-export interface Itraf extends IBox {
+export interface ITRAF extends IBox {
 
 }
 
@@ -14,13 +14,13 @@ export interface Itraf extends IBox {
  * Track Fragment Box
  */
 
-export class traf implements Itraf {
+export class TRAF implements ITRAF {
 
     public static TYPE: string = "traf";
     public static CHILDREN: string[] = [
-        tfhd.TYPE,
-        trun.TYPE,
-        tfdt.TYPE,
+        TFHD.TYPE,
+        TRUN.TYPE,
+        TFDT.TYPE,
     ];
 
     public type: string;
@@ -37,8 +37,8 @@ export class traf implements Itraf {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${traf.TYPE}: ${stringifyBox(this)}`;
+            return `${TRAF.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${traf.TYPE}`;
+        return `${TRAF.TYPE}`;
     }
 }

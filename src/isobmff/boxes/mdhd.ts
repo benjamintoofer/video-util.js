@@ -1,7 +1,7 @@
 
 import { IBox, stringifyBox, IFullBox, parseFullBox } from "./box";
 
-export interface Imdhd extends IFullBox {}
+export interface IMDHD extends IFullBox {}
 
 /**
  * ISO/IEC 14496-12:2012
@@ -10,7 +10,7 @@ export interface Imdhd extends IFullBox {}
  * Media Header Box
  */
 
-export class mdhd implements Imdhd {
+export class MDHD implements IMDHD {
 
     public static TYPE: string = "mdhd";
     public static CHILDREN: string[] = [];
@@ -34,8 +34,8 @@ export class mdhd implements Imdhd {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${mdhd.TYPE}: ${stringifyBox(this)}`;
+            return `${MDHD.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${mdhd.TYPE}`;
+        return `${MDHD.TYPE}`;
     }
 }

@@ -1,6 +1,6 @@
 import { IFullBox, IBox, parseFullBox, getUint53, stringifyBox } from "./box";
 
- export interface Iprft extends IFullBox {
+ export interface IPRFT extends IFullBox {
     referenceTrackID: number;       // 32 bit unsigned
     ntpTimestamp: number;           // 64 bit unsigned
     mediaTime: number;              // if version == 0 ? 32 bit unsigned : 64 bit unsigned
@@ -15,7 +15,7 @@ import { IFullBox, IBox, parseFullBox, getUint53, stringifyBox } from "./box";
   * and consumed in real time, this can provide clients with information to enable consumption and
   * production to proceed at equivalent rates, thus avoiding possible buffer overflow or underflow.
   */
- export class prft implements Iprft {
+ export class PRFT implements IPRFT {
 
     public static TYPE: string = "prft";
     public static CHILDREN: string[] = [];
@@ -58,7 +58,7 @@ import { IFullBox, IBox, parseFullBox, getUint53, stringifyBox } from "./box";
 
     public toString(detail: boolean): string {
         if  (detail) {
-            return `${prft.TYPE}: ${stringifyBox(this)}`;
+            return `${PRFT.TYPE}: ${stringifyBox(this)}`;
         }
     }
  }

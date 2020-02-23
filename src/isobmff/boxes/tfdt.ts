@@ -3,11 +3,11 @@
  */
 import { IBox, IFullBox, parseFullBox, getUint53, stringifyBox } from "./box";
 
-export interface Itfdt extends IFullBox {
+export interface ITFDT extends IFullBox {
     baseMediaDecodeTime: number;        // if version == 1 ? 64 bit unsigned : 32 bit unsigned
 }
 
-export class tfdt implements Itfdt {
+export class TFDT implements ITFDT {
     public static TYPE: string = "tfdt";
     public static CHILDREN: string[] = [];
 
@@ -28,7 +28,7 @@ export class tfdt implements Itfdt {
         this.flags = flags;
         this.absoluteOffset = dv.byteOffset;
 
-        let offset = 12;
+        const offset = 12;
         if (this.version) {
             this.baseMediaDecodeTime = getUint53(dv, offset);
         } else {
@@ -38,9 +38,9 @@ export class tfdt implements Itfdt {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${tfdt.TYPE}: ${stringifyBox(this)}`;
+            return `${TFDT.TYPE}: ${stringifyBox(this)}`;
         }
-        return tfdt.TYPE;
+        return TFDT.TYPE;
     }
 
     public getAbsoluteOffset(): number {

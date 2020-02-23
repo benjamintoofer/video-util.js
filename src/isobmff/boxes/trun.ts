@@ -32,21 +32,21 @@ const enum tr_flags {
 }
 
 export interface ISample {
-    sampleDuration?: number                     // 32 bit unsigned
-    sampleSize?: number                         // 32 bit unsigned
-    sampleFlags?: number                        // 32 bit unsigned
-    sampleCompositionTimeOffset?: number        // if version = 0 ? 32 bit unsigned : 32 bit signed
+    sampleDuration?: number;                     // 32 bit unsigned
+    sampleSize?: number;                         // 32 bit unsigned
+    sampleFlags?: number;                        // 32 bit unsigned
+    sampleCompositionTimeOffset?: number;        // if version = 0 ? 32 bit unsigned : 32 bit signed
 }
 
- export interface Itrun extends IFullBox {
-     sampleCount: number        // 32 bit unsigned
+ export interface ITRUN extends IFullBox {
+     sampleCount: number;        // 32 bit unsigned
      // Optional Fields
-     dataOffset?: number        // 32 bit signed
-     firstSampleFlags?: number  // 32 bit unsigned
-     samples?: ISample[]  
+     dataOffset?: number;        // 32 bit signed
+     firstSampleFlags?: number;  // 32 bit unsigned
+     samples?: ISample[];  
  }
 
- export class trun implements Itrun {
+ export class TRUN implements ITRUN {
      public static TYPE: string = "trun";
      public static CHILDREN: string[] = [];
 

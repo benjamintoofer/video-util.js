@@ -1,4 +1,14 @@
+export const byteToString = (num: number): string => {
+    let str = "";
+    let temp = num;
 
+    while (temp > 0) {
+        const char = String.fromCharCode(temp & 0xFF);
+        temp = temp >> 0x8;
+        str += char;
+    }
+    return [...str].reverse().join("");
+};
 
 interface IBoxParser<T> {
     parse: (dv: DataView) => T;
@@ -10,7 +20,7 @@ class Box {
             size: dv.getUint32(0),
             type: byteToString(dv.getUint32(4)),
             getAbsoluteOffset: () => dv.byteOffset
-        }
+        };
     }
 }
 
@@ -21,21 +31,17 @@ class FullBox {
             ...Box.parse(dv),
             version: (versionAndFlags >> 24) & 0xFF,
             flags: versionAndFlags & 0xFFFFFF,
-        }
+        };
     }
 }
 
 
 
-interface toString {
+interface IToString {
     toString: (detail: boolean) => string;
 }
 
-export interface containsBox {
-    containsBox: (box: string) => boolean;
-}
-
-export interface IBox extends toString {
+export interface IBox extends IToString {
     type: string;   // 32 bit unsigned
     size: number;   // 32 bit unsigned
     getAbsoluteOffset(): number;
@@ -48,23 +54,11 @@ export interface IFullBox extends IBox {
 
 const parse = <T>(parser: IBoxParser<T>) => (dv: DataView) => {
     return parser.parse(dv);
-}
+};
 
 export const parseFullBox = parse<IFullBox>(FullBox);
 
 export const parseBox = parse<IBox>(Box);
-
-export const byteToString = (num: number): string => {
-    let str = ""
-    let temp = num;
-
-    while (temp > 0) {
-        const char = String.fromCharCode(temp & 0xFF);
-        temp = temp >> 0x8;
-        str += char;
-    }
-    return [...str].reverse().join("");
-}
 
 export const getUint53 = (dv: DataView, offset: number): number => {
     let byteOffset = offset;
@@ -74,7 +68,7 @@ export const getUint53 = (dv: DataView, offset: number): number => {
     const upper21 = (upper32 & 0x1FFFFF);
     const total = (upper21 * Math.pow(2, 32)) + lower32;
     return total;
-}
+};
 
 export const getInt53 = (dv: DataView, offset: number): number => {
     let byteOffset = offset;
@@ -89,17 +83,18 @@ export const getInt53 = (dv: DataView, offset: number): number => {
     const upper21 = (upper32 & 0x1FFFFF);
     const total = (upper21 * Math.pow(2, 32)) + lower32;
     return total;
-}
+};
 
-export const stringifyBox = (box: IBox): string => {
-    return JSON.stringify(box, typeReplacer, 2);
-}
-
-const typeReplacer = (key: string, value: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const typeReplacer = (key: string, value: any): any => {
     if (key === "type") {
         return undefined;
     }
     return value;
-}
+};
+
+export const stringifyBox = (box: IBox): string => {
+    return JSON.stringify(box, typeReplacer, 2);
+};
 
 

@@ -1,90 +1,90 @@
 import { IBox, parseBox } from "./box";
-import { styp } from "./styp";
-import { prft } from "./prft";
-import { sidx } from "./sidx";
-import { ftyp } from "./ftyp";
-import { moov } from "./moov";
-import { moof } from "./moof";
-import { mfhd } from "./mfhd";
-import { mdat } from "./mdat";
-import { trun } from "./trun";
-import { traf } from "./traf";
-import { tfdt } from "./tfdt";
-import { tfhd } from "./tfhd";
-import { mvhd } from "./mvhd";
-import { elst } from "./elst";
-import { edts } from "./edts";
-import { trak } from "./trak";
-import { tkhd } from "./tkhd";
-import { mdia } from "./mdia";
-import { mvex } from "./mvex";
-import { udta } from "./udta";
-import { mdhd } from "./mdhd";
-import { hdlr } from "./hdlr";
-import { minf } from "./minf";
-import { dinf } from "./dinf";
-import { vmhd } from "./vmhd";
-import { stbl } from "./stbl";
-import { smhd } from "./smhd";
+import { STYP } from "./STYP";
+import { PRFT } from "./PRFT";
+import { SIDX } from "./SIDX";
+import { FTYP } from "./FTYP";
+import { MOOV } from "./MOOV";
+import { MOOF } from "./MOOF";
+import { MFHD } from "./MFHD";
+import { MDAT } from "./MDAT";
+import { TRUN } from "./TRUN";
+import { TRAF } from "./TRAF";
+import { TFDT } from "./TFDT";
+import { TFHD } from "./TFHD";
+import { MVHD } from "./MVHD";
+import { ELST } from "./ELST";
+import { EDTS } from "./EDTS";
+import { TRAK } from "./TRAK";
+import { TKHD } from "./TKHD";
+import { MDIA} from "./mdia";
+import { MVEX } from "./MVEX";
+import { UDTA } from "./UDTA";
+import { MDHD } from "./MDHD";
+import { HDLR } from "./HDLR";
+import { MINF } from "./MINF";
+import { DINF} from "./DINF";
+import { VMHD } from "./VMHD";
+import { STBL } from "./STBL";
+import { SMHD } from "./SMHD";
 
 type BoxClassType = 
-    typeof styp |
-    typeof prft |
-    typeof sidx |
-    typeof ftyp |
-    typeof trun |
-    typeof moov |
-    typeof moof |
-    typeof mfhd |
-    typeof mvhd |
-    typeof mdat |
-    typeof traf |
-    typeof tfdt |
-    typeof tfhd |
-    typeof trak |
-    typeof tkhd |
-    typeof mdia |
-    typeof mvex |
-    typeof udta |
-    typeof mdhd |
-    typeof hdlr |
-    typeof minf |
-    typeof dinf |
-    typeof vmhd |
-    typeof stbl |
-    typeof smhd |
-    typeof edts |
-    typeof elst;
+    typeof STYP |
+    typeof PRFT |
+    typeof SIDX |
+    typeof FTYP |
+    typeof TRUN |
+    typeof MOOV |
+    typeof MOOF |
+    typeof MFHD |
+    typeof MVHD |
+    typeof MDAT |
+    typeof TRAF |
+    typeof TFDT |
+    typeof TFHD |
+    typeof TRAK |
+    typeof TKHD |
+    typeof MDIA|
+    typeof MVEX |
+    typeof UDTA |
+    typeof MDHD |
+    typeof HDLR |
+    typeof MINF |
+    typeof DINF|
+    typeof VMHD |
+    typeof STBL |
+    typeof SMHD |
+    typeof EDTS |
+    typeof ELST;
 
 export const boxMap: { [x: string]: BoxClassType | undefined } = {
-    [styp.TYPE]: styp,
-    [prft.TYPE]: prft,
-    [sidx.TYPE]: sidx,
-    [ftyp.TYPE]: ftyp,
-    [moov.TYPE]: moov,
-    [moof.TYPE]: moof,
-    [mfhd.TYPE]: mfhd,
-    [mvhd.TYPE]: mvhd,
-    [mdat.TYPE]: mdat,
-    [trun.TYPE]: trun,
-    [traf.TYPE]: traf,
-    [tfdt.TYPE]: tfdt,
-    [tfhd.TYPE]: tfhd,
-    [edts.TYPE]: edts,
-    [elst.TYPE]: elst,
-    [trak.TYPE]: trak,
-    [tkhd.TYPE]: tkhd,
+    [STYP.TYPE]: STYP,
+    [PRFT.TYPE]: PRFT,
+    [SIDX.TYPE]: SIDX,
+    [FTYP.TYPE]: FTYP,
+    [MOOV.TYPE]: MOOV,
+    [MOOF.TYPE]: MOOF,
+    [MFHD.TYPE]: MFHD,
+    [MVHD.TYPE]: MVHD,
+    [MDAT.TYPE]: MDAT,
+    [TRUN.TYPE]: TRUN,
+    [TRAF.TYPE]: TRAF,
+    [TFDT.TYPE]: TFDT,
+    [TFHD.TYPE]: TFHD,
+    [EDTS.TYPE]: EDTS,
+    [ELST.TYPE]: ELST,
+    [TRAK.TYPE]: TRAK,
+    [TKHD.TYPE]: TKHD,
     [mdia.TYPE]: mdia,
-    [mvex.TYPE]: mvex,
-    [udta.TYPE]: udta,
-    [mdhd.TYPE]: mdhd,
-    [hdlr.TYPE]: hdlr,
-    [minf.TYPE]: minf,
-    [dinf.TYPE]: dinf,
-    [vmhd.TYPE]: vmhd,
-    [stbl.TYPE]: stbl,
-    [smhd.TYPE]: smhd,
-}
+    [MVEX.TYPE]: MVEX,
+    [UDTA.TYPE]: UDTA,
+    [MDHD.TYPE]: MDHD,
+    [HDLR.TYPE]: HDLR,
+    [MINF.TYPE]: MINF,
+    [DINF.TYPE]: DINF,
+    [VMHD.TYPE]: VMHD,
+    [STBL.TYPE]: STBL,
+    [SMHD.TYPE]: SMHD,
+};
 
 export const boxFactory = <T extends IBox>(offset: number, data: ArrayBuffer): T => {
     const dv = new DataView(data, offset);
@@ -94,4 +94,4 @@ export const boxFactory = <T extends IBox>(offset: number, data: ArrayBuffer): T
         return box as T;
     }
     return new boxMap[box.type](box, dv) as T;
-}
+};

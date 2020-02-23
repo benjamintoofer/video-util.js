@@ -1,6 +1,6 @@
 import { IBox, stringifyBox, IFullBox, parseFullBox } from "./box";
 
-export interface Imvhd extends IFullBox {
+export interface IMVHD extends IFullBox {
     creationTime: number;
     modificationTime: number;
     timescale: number;
@@ -17,7 +17,7 @@ export interface Imvhd extends IFullBox {
  *
  * Movie Header Box
  */
-export class mvhd implements Imvhd {
+export class MVHD implements IMVHD {
 
     public static TYPE: string = "mvhd";
     public static CHILDREN: string[] = [];
@@ -50,8 +50,8 @@ export class mvhd implements Imvhd {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${mvhd.TYPE}: ${stringifyBox(this)}`;
+            return `${MVHD.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${mvhd.TYPE}`;
+        return `${MVHD.TYPE}`;
     }
 }

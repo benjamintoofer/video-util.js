@@ -1,6 +1,6 @@
 import { IBox, byteToString, stringifyBox } from "./box";
 
-export interface Iftyp extends IBox {
+export interface IFTYP extends IBox {
     majorBrand: string;             // 32 bit unsigned
     minorVersion: number;           // 32 bit unsigned
     compatibleBrands: string[];     // 32 bit unsigned []
@@ -12,7 +12,7 @@ export interface Iftyp extends IBox {
  * 
  * Fragment Type Box
  */
-export class ftyp implements Iftyp {
+export class FTYP implements IFTYP {
 
     public static TYPE: string = "ftyp";
     public static CHILDREN: string[] = [];
@@ -48,8 +48,8 @@ export class ftyp implements Iftyp {
 
     public toString(detail: boolean = false): string {
         if (detail) {
-            return `${ftyp.TYPE}: ${stringifyBox(this)}`;
+            return `${FTYP.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${ftyp.TYPE}`;
+        return `${FTYP.TYPE}`;
     }
 }

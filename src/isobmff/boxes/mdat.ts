@@ -3,11 +3,11 @@
  */
 import { IBox, stringifyBox } from "./box";
 
-export interface Imdat extends IBox {
+export interface IMDAT extends IBox {
     data: DataView;
 }
 
-export class mdat implements Imdat {
+export class MDAT implements IMDAT {
     public static TYPE: string = "mdat";
     public static CHILDREN: string[] = [];
 
@@ -27,8 +27,8 @@ export class mdat implements Imdat {
 
     public toString(detail: boolean = false): string {
         if (detail) {
-            return `${mdat.TYPE}: ${stringifyBox(this)}`;
+            return `${MDAT.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${mdat.TYPE}`;
+        return `${MDAT.TYPE}`;
     }
 } 

@@ -1,6 +1,6 @@
 import { IBox, byteToString, stringifyBox } from "./box";
 
-export interface Istyp extends IBox {
+export interface ISTYP extends IBox {
     majorBrand: string;             // 32 bit unsigned
     minorVersion: number;           // 32 bit unsigned
     compatibleBrands: string[];     // 32 bit unsigned []
@@ -12,7 +12,7 @@ export interface Istyp extends IBox {
  *
  * Segment Type Box
  */
-export class styp implements Istyp {
+export class STYP implements ISTYP {
 
     public static TYPE: string = "styp";
     public static CHILDREN: string[] = [];
@@ -48,8 +48,8 @@ export class styp implements Istyp {
 
     public toString(detail: boolean = false): string {
         if (detail){
-            return `${styp.TYPE}: ${stringifyBox(this)}`;
+            return `${STYP.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${styp.TYPE}`;
+        return `${STYP.TYPE}`;
     }
 }

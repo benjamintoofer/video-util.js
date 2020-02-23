@@ -7,7 +7,7 @@ interface IEdit {
     mediaRateFraction: number;
 }
 
-export interface Ielst extends IFullBox {
+export interface IELST extends IFullBox {
     entryCount: number;         // 32 bit unsigned
     edits: IEdit[];
 }
@@ -18,7 +18,7 @@ export interface Ielst extends IFullBox {
  * 
  * Edit List Box
  */
-export class elst implements Ielst {
+export class ELST implements IELST {
 
     public static TYPE: string = "elst";
     public static CHILDREN: string[] = [];
@@ -75,8 +75,8 @@ export class elst implements Ielst {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${elst.TYPE}: ${stringifyBox(this)}`;
+            return `${ELST.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${elst.TYPE}`;
+        return `${ELST.TYPE}`;
     }
 }

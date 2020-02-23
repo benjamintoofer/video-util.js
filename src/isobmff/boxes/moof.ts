@@ -2,17 +2,17 @@
  * Movie Fragment Box
  */
 import { IBox, stringifyBox } from "./box";
-import { mfhd } from "./mfhd";
-import { traf } from "./traf";
+import { MFHD } from "./MFHD";
+import { TRAF } from "./TRAF";
 
-export interface Imoof extends IBox { }
+export interface IMOOF extends IBox { }
 
-export class moof implements Imoof {
+export class MOOF implements IMOOF {
 
     public static TYPE: string  = "moof";
     public static CHILDREN: string[] = [
-        traf.TYPE,
-        mfhd.TYPE,
+        TRAF.TYPE,
+        MFHD.TYPE,
     ]
 
     public type: string;
@@ -29,8 +29,8 @@ export class moof implements Imoof {
 
     public toString(detail: boolean = false): string {
         if (detail) {
-            return `${moof.TYPE}: ${stringifyBox(this)}`;
+            return `${MOOF.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${moof.TYPE}`;
+        return `${MOOF.TYPE}`;
     }
 }

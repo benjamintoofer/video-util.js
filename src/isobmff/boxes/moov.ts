@@ -1,10 +1,10 @@
 import { IBox, stringifyBox } from "./box";
-import { mvhd } from "./mvhd";
-import { trak } from "./trak";
-import { mvex } from "./mvex";
-import { udta } from "./udta";
+import { MVHD } from "./MVHD";
+import { TRAK } from "./TRAK";
+import { MVEX } from "./MVEX";
+import { UDTA } from "./UDTA";
 
-export interface Imoov extends IBox {}
+export interface IMOOV extends IBox {}
 
 /**
  * ISO/IEC 14496-12:2012
@@ -12,14 +12,14 @@ export interface Imoov extends IBox {}
  *
  * Movie Box
  */
-export class moov implements Imoov {
+export class MOOV implements IMOOV {
 
     public static TYPE: string = "moov";
     public static CHILDREN: string[] = [
-        mvhd.TYPE,
-        trak.TYPE,
-        mvex.TYPE,
-        udta.TYPE,
+        MVHD.TYPE,
+        TRAK.TYPE,
+        MVEX.TYPE,
+        UDTA.TYPE,
     ];
 
     public type: string;
@@ -36,12 +36,12 @@ export class moov implements Imoov {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${moov.TYPE}: ${stringifyBox(this)}`;
+            return `${MOOV.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${moov.TYPE}`;
+        return `${MOOV.TYPE}`;
     }
 
     public static containsBox(box: string): boolean {
-        return moov.CHILDREN.indexOf(box) !== -1;
+        return MOOV.CHILDREN.indexOf(box) !== -1;
     }
 }

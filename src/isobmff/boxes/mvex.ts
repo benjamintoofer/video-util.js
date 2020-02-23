@@ -1,6 +1,6 @@
 import { IBox, stringifyBox } from "./box";
 
-export interface Imvex extends IBox {}
+export interface IMVEX extends IBox {}
 
 /**
  * ISO/IEC 14496-12:2012
@@ -8,7 +8,7 @@ export interface Imvex extends IBox {}
  *
  * Movie Extends Box
  */
-export class mvex implements Imvex {
+export class MVEX implements IMVEX {
 
     public static TYPE: string = "mvex";
     public static CHILDREN: string[] = [
@@ -31,8 +31,8 @@ export class mvex implements Imvex {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${mvex.TYPE}: ${stringifyBox(this)}`;
+            return `${MVEX.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${mvex.TYPE}`;
+        return `${MVEX.TYPE}`;
     }
 }

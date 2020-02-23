@@ -1,6 +1,6 @@
 import { IBox, stringifyBox } from "./box";
 
-export interface Ismhd extends IBox { }
+export interface ISMHD extends IBox { }
 
 /**
  * ISO/IEC 14496-12:2012
@@ -8,7 +8,7 @@ export interface Ismhd extends IBox { }
  *
  * 
  */
-export class smhd implements Ismhd {
+export class SMHD implements ISMHD {
 
     public static TYPE: string = "smhd";
     public static CHILDREN: string[] = [
@@ -29,8 +29,8 @@ export class smhd implements Ismhd {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${smhd.TYPE}: ${stringifyBox(this)}`;
+            return `${SMHD.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${smhd.TYPE}`;
+        return `${SMHD.TYPE}`;
     }
 }

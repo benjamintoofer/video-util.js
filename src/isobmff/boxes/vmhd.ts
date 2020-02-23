@@ -1,6 +1,6 @@
 import { IBox, stringifyBox, IFullBox, parseFullBox } from "./box";
 
-export interface Ivmhd extends IFullBox { 
+export interface IVMHD extends IFullBox { 
     /**
      * specifies a composition mode for this video track, from the following enumerated set, 
      * which may be extended by derived specifications: 
@@ -20,7 +20,7 @@ export interface Ivmhd extends IFullBox {
  *
  * Video Media Header Box
  */
-export class vmhd implements Ivmhd {
+export class VMHD implements IVMHD {
 
     public static TYPE: string = "vmhd";
     public static CHILDREN: string[] = [];
@@ -57,8 +57,8 @@ export class vmhd implements Ivmhd {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${vmhd.TYPE}: ${stringifyBox(this)}`;
+            return `${VMHD.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${vmhd.TYPE}`;
+        return `${VMHD.TYPE}`;
     }
 }

@@ -7,7 +7,7 @@ const enum tk_flags {
     TRACK_IN_PREVIEW =  0x000004,
 }
 
-export interface Itkhd extends IFullBox {
+export interface ITKHD extends IFullBox {
     creationTime: number;
     modificationTime: number;
     trackId: number;
@@ -35,9 +35,9 @@ export interface Itkhd extends IFullBox {
  *
  * Track Header Box Box
  */
-export class tkhd implements Itkhd {
+export class TKHD implements ITKHD {
 
-    public static TYPE: string = "tkhd";
+    public static TYPE = "tkhd";
     public static CHILDREN: string[] = [];
 
     public type: string;
@@ -51,9 +51,9 @@ export class tkhd implements Itkhd {
     public modificationTime: number;
     public trackId: number;
     public duration: number;
-    public layer: number = 0;
-    public alternateGroup: number = 0;
-    public volume: number = 0;
+    public layer = 0;
+    public alternateGroup = 0;
+    public volume = 0;
     public matrix: number[] = [
         0x00010000, 0x0, 0x0,
         0x0, 0x00010000, 0x0,
@@ -105,8 +105,8 @@ export class tkhd implements Itkhd {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${tkhd.TYPE}: ${stringifyBox(this)}`;
+            return `${TKHD.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${tkhd.TYPE}`;
+        return `${TKHD.TYPE}`;
     }
 }

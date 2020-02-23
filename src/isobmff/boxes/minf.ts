@@ -1,7 +1,7 @@
 import { IBox, stringifyBox } from "./box";
-import { dinf } from "./dinf";
+import { DINF} from "./DINF";
 
-export interface Iminf extends IBox { }
+export interface IMINF extends IBox { }
 
 /**
  * ISO/IEC 14496-12:2012
@@ -9,16 +9,16 @@ export interface Iminf extends IBox { }
  *
  * Media Information Box
  */
-export class minf implements Iminf {
+export class MINF implements IMINF {
 
     public static TYPE: string = "minf";
     public static CHILDREN: string[] = [
-        // vmhd
-        // smhd
+        // VMHD
+        // SMHD
         // hmhd
         // nmhd
-        dinf.TYPE,
-        // stbl
+        DINF.TYPE,
+        // STBL
     ];
 
     public type: string;
@@ -35,8 +35,8 @@ export class minf implements Iminf {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${minf.TYPE}: ${stringifyBox(this)}`;
+            return `${MINF.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${minf.TYPE}`;
+        return `${MINF.TYPE}`;
     }
 }

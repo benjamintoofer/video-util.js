@@ -1,8 +1,8 @@
 
 import { IBox, stringifyBox } from "./box";
-import { elst } from "./elst";
+import { ELST } from "./ELST";
 
-export interface Iedts extends IBox {
+export interface IEDTS extends IBox {
 
 }
 
@@ -19,11 +19,11 @@ export interface Iedts extends IBox {
  * start time of a track.
  */
 
-export class edts implements Iedts {
+export class EDTS implements IEDTS {
 
     public static TYPE: string = "edts";
     public static CHILDREN: string[] = [
-        elst.TYPE
+        ELST.TYPE
     ];
 
     public type: string;
@@ -40,8 +40,8 @@ export class edts implements Iedts {
 
     public toString(detail: boolean): string {
         if (detail) {
-            return `${edts.TYPE}: ${stringifyBox(this)}`;
+            return `${EDTS.TYPE}: ${stringifyBox(this)}`;
         }
-        return `${edts.TYPE}`;
+        return `${EDTS.TYPE}`;
     }
 }
