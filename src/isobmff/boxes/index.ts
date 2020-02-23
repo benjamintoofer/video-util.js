@@ -16,7 +16,7 @@ import { ELST } from "./ELST";
 import { EDTS } from "./EDTS";
 import { TRAK } from "./TRAK";
 import { TKHD } from "./TKHD";
-import { MDIA} from "./mdia";
+import { MDIA} from "./MDIA";
 import { MVEX } from "./MVEX";
 import { UDTA } from "./UDTA";
 import { MDHD } from "./MDHD";
@@ -74,7 +74,7 @@ export const boxMap: { [x: string]: BoxClassType | undefined } = {
     [ELST.TYPE]: ELST,
     [TRAK.TYPE]: TRAK,
     [TKHD.TYPE]: TKHD,
-    [mdia.TYPE]: mdia,
+    [MDIA.TYPE]: MDIA,
     [MVEX.TYPE]: MVEX,
     [UDTA.TYPE]: UDTA,
     [MDHD.TYPE]: MDHD,

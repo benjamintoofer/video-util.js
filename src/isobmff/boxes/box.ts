@@ -19,7 +19,7 @@ class Box {
         return {
             size: dv.getUint32(0),
             type: byteToString(dv.getUint32(4)),
-            getAbsoluteOffset: () => dv.byteOffset
+            getAbsoluteOffset: (): number => dv.byteOffset
         };
     }
 }
@@ -52,7 +52,7 @@ export interface IFullBox extends IBox {
     flags: number;      // 24 bit unsigned
 }
 
-const parse = <T>(parser: IBoxParser<T>) => (dv: DataView) => {
+const parse = <T>(parser: IBoxParser<T>) => (dv: DataView): T => {
     return parser.parse(dv);
 };
 

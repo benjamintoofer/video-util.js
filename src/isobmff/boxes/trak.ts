@@ -1,7 +1,7 @@
 import { IBox, stringifyBox } from "./box";
 import { EDTS } from "./EDTS";
 import { TKHD } from "./TKHD";
-import { MDIA} from "./mdia";
+import { MDIA} from "./MDIA";
 
 export interface ITRAK extends IBox {
 

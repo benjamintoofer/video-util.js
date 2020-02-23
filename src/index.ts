@@ -1,6 +1,7 @@
 import { 
-    viewISOTreeAsJSON, findBox, extractCaptions, parseNALUnits
+    viewISOTreeAsJSON, findBox, extractCaptions
 } from "./isobmff";
+import { parseNALUnits } from "./h264/nal";
 import * as fs from "fs";
 import * as path from "path";
 import { IELST } from "./isobmff/boxes/ELST";

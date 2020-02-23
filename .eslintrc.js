@@ -13,10 +13,12 @@ module.exports = {
         "@typescript-eslint/interface-name-prefix": ["error", { "prefixWithI": "always" }],
         "@typescript-eslint/no-inferrable-types": ["off"],
         "@typescript-eslint/no-empty-interface": ["off"],
+        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
         // Write a script that will generate this array
         "@typescript-eslint/camelcase": ["error", { allow: ["emulation_prevention_three_byte", "slice*", "tf_flags", "tk_flags", "tr_flags"]}],
 
         quotes: ["error", "double", { "allowTemplateLiterals": true }],
-        semi: ["error", "always"]
+        semi: ["error", "always"],
+        "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     },
 };
