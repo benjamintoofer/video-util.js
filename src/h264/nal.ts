@@ -1,3 +1,5 @@
+import { findBox } from "../isobmff";
+import { IMDAT, MDAT } from "../isobmff/boxes/MDAT";
 
 const NalUnitTypeMap: { [x: number]: string } = {
     0: "Unspecified",
@@ -24,14 +26,6 @@ const isEmulationPreventionThreeByte = (threeByte: number): boolean => {
 const next24Bits = (dv: DataView, offset: number): number => {
     const threeByte = dv.getUint16(offset) * Math.pow(2, 8);
     return dv.getUint8(offset + 2) + threeByte;
-};
-
-const parseExpGolomb = (data: ArrayBuffer): number => {
-    let leadingZeroBits = -1;
-    for (let b = 0; !b; leadingZeroBits++) {
-        // b = data[0];
-    }
-    return 0;
 };
 
 const slice_header = (nalUnitType: number): void => {
@@ -86,7 +80,7 @@ const parseNALHeader = (nalHeader: number) => {
     };
 };
 
-const parseNalUnit = (nalUnit: ArrayBuffer) => {
+const parseNalUnit = (nalUnit: ArrayBuffer): void => {
     const dv = new DataView(nalUnit);
     const header = dv.getUint8(0);
     const nalHeader = parseNALHeader(header);
@@ -99,9 +93,9 @@ const parseNalUnit = (nalUnit: ArrayBuffer) => {
 
 };
 
-export const parseNALUnits = (segment: ArrayBuffer) => {
-    const MDATs = findBox<IMDAT>(MDAT.TYPE, segment);
-    const MDATBox = MDATs[0].data;
+export const parseNALUnits = (segment: ArrayBuffer): void => {
+    const mdats = findBox<IMDAT>(MDAT.TYPE, segment);
+    const MDATBox = mdats[0].data;
 
     let offset = 0;
     const index = 0;

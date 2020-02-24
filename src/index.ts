@@ -6,6 +6,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { IELST } from "./isobmff/boxes/ELST";
 import { ITRUN } from "./isobmff/boxes/TRUN";
+import { readBits } from "./h264/util";
 
 // const segmentPath = path.join(__dirname, "../segments/chunk-stream_t_1-40517.m4s");
 // fs.readFile(segmentPath, null, (err, data)=> {
@@ -37,5 +38,6 @@ fs.readFile(initHeaderPath2, null, (err, data) => {
 
     // const TRUN = findBox<ITRUN>("TRUN", data.buffer)[0];
     // console.log(TRUN);
-    parseNALUnits(data.buffer);
+    // parseNALUnitse(data.buffer);
+    readBits(0, data.buffer, 4);
 });
