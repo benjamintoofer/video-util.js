@@ -12,12 +12,20 @@ export const readBits = (bitOffset: number, data: ArrayBuffer, numOfBits: number
     return (temp & (mask * Math.pow(2, shiftBy))) >>> shiftBy;
 };
 
-export const parseExpGolomb = (data: ArrayBuffer): number => {
+interface IExpGolombPayload {
+    bitOffset: number;
+    codeNum: number;
+}
+
+export const parseExpGolomb = (bitOffset: number, data: ArrayBuffer): IExpGolombPayload => {
     let leadingZeroBits = -1;
-    let bitOffset = 0;
+    let offset = bitOffset;
     for (let b = 0; !b; leadingZeroBits++) {
-        b = readBits(bitOffset++, data, 1);
+        b = readBits(offset++, data, 1);
     }
-    const codeNum = Math.pow(2, leadingZeroBits) - 1 + readBits(0, data, leadingZeroBits,);
-    return codeNum;
+    const codeNum = Math.pow(2, leadingZeroBits) - 1 + readBits(offset, data, leadingZeroBits,);
+    return {
+        bitOffset: offset + leadingZeroBits,
+        codeNum,
+    };
 };

@@ -34,7 +34,16 @@ describe("H.246 Util", () => {
     });
 
     describe("parseExpGolomb", () => {
-
+        it.only("TEST", () => {
+            const data = new Uint8Array([141, 3, 148, 0, 0, 0, 0, 0]);
+            console.warn(data.buffer);
+            let res = parseExpGolomb(0, data.buffer);
+            console.log(res);
+            res = parseExpGolomb(res.bitOffset, data.buffer);
+            console.log(res);
+            res = parseExpGolomb(res.bitOffset, data.buffer);
+            console.log(res);
+        });
     });
 });
 
