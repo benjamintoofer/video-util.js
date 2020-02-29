@@ -36,7 +36,7 @@ export const findBox = <T extends IBox>(boxName: string, segment: ArrayBuffer, d
         }
 
         const boxClass = boxMap[parsedBox.type];
-        if (boxClass.CHILDREN.length > 0) {
+        if (boxClass && boxClass.CHILDREN.length > 0) {
             const start = offset + 8;
             const end = offset + parsedBox.size;
             const foundChildrenBoxes = findBox<T>(boxName, segment.slice(start, end), detail);
