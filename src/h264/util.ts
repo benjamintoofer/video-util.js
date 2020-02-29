@@ -5,15 +5,19 @@ export const readBits = (bitOffset: number, data: ArrayBuffer, numOfBits: number
         console.warn("readBits: exceeds 32 bit read");
         return;
     }
-    const temp: number = new DataView(data, byteOffset).getUint32(0) * Math.pow(2, offset);
-    return temp & numOfBits;
+    const shiftBy = 32 - numOfBits - offset;
+    const mask = Math.pow(2, numOfBits) - 1;
+    const temp: number = new DataView(data, byteOffset).getUint32(0);
+    // Shift the mask and extract he bits we want, then shift them back to the 0th position
+    return (temp & (mask * Math.pow(2, shiftBy))) >>> shiftBy;
 };
 
 export const parseExpGolomb = (data: ArrayBuffer): number => {
     let leadingZeroBits = -1;
+    let bitOffset = 0;
     for (let b = 0; !b; leadingZeroBits++) {
-        // b = data[0];
+        b = readBits(bitOffset++, data, 1);
     }
     const codeNum = Math.pow(2, leadingZeroBits) - 1 + readBits(0, data, leadingZeroBits,);
-    return 0;
+    return codeNum;
 };
