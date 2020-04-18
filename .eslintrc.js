@@ -15,7 +15,7 @@ module.exports = {
         "@typescript-eslint/no-empty-interface": ["off"],
         "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
         // Write a script that will generate this array
-        "@typescript-eslint/camelcase": ["error", { allow: ["emulation_prevention_three_byte", "slice*", "tf_flags", "tk_flags", "tr_flags"]}],
+        "@typescript-eslint/camelcase": ["error", { allow: ["emulation_prevention_three_byte", "slice*", "tf_flags", "tk_flags", "tr_flags", "rbsp_trailing_bits"]}],
 
         quotes: ["error", "double", { "allowTemplateLiterals": true }],
         semi: ["error", "always"],

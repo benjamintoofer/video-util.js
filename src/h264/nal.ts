@@ -1,5 +1,6 @@
 import { findBox } from "../isobmff";
 import { IMDAT, MDAT } from "../isobmff/boxes/MDAT";
+import { parseExpGolomb } from "./util";
 
 const NalUnitTypeMap: { [x: number]: string } = {
     0: "Unspecified",
@@ -28,18 +29,42 @@ const next24Bits = (dv: DataView, offset: number): number => {
     return dv.getUint8(offset + 2) + threeByte;
 };
 
-const slice_header = (nalUnitType: number): void => {
+const sliceTypeMap: { [x: number]: string } = {
+    0: "P slice",
+    1: "B slice",
+    2: "I slice",
+    3: "SP slice",
+    4: "SI slice",
+    5: "P slice",
+    6: "B slice",
+    7: "I slice",
+    8: "SP slice",
+    9: "SI slice",
+};
+
+const slice_header = (nalUnitType: number, rbsp: ArrayBuffer): void => {
     // first_mb_in_slice        ue(v)
     // slice_type               ue(v)
     // pic_parameter_set_id     ue(v)
     // frame_num                u(v)
+    const first_mb_in_slice = parseExpGolomb(0, rbsp);
+    const slice_type = parseExpGolomb(first_mb_in_slice.bitOffset, rbsp);
+    const pic_parameter_set_id = parseExpGolomb(slice_type.bitOffset, rbsp);
+    // console.warn(`MACROBLOCK ADDRESS: ${first_mb_in_slice.codeNum}, ${first_mb_in_slice.bitOffset}`);
+    console.warn(`NAL UNIT- ${nalUnitType} SLICE TYPE: ${sliceTypeMap[slice_type.codeNum]} PPS: ${pic_parameter_set_id.codeNum}`);
 };
 
-const slice_layer_without_partitioning_rbsp = (rbsp: ArrayBuffer, nalUnitType: number) => {
+const slice_layer_without_partitioning_rbsp = (rbsp: ArrayBuffer, nalUnitType: number): void => {
     const start = rbsp.byteLength - 2;
     const end = start + 1;
-    console.log(rbsp.slice(start - 1, end));
-    slice_header(nalUnitType);
+    // console.log(rbsp.slice(start - 1, end));
+    slice_header(nalUnitType, rbsp);
+};
+
+const rbsp_trailing_bits = (rbsp: ArrayBuffer): ArrayBuffer => {
+    const dv = new DataView(rbsp);
+    // console.log(dv.getUint8(dv.byteLength - 1).toString(2));
+    return rbsp;
 };
 
 /**
@@ -84,10 +109,15 @@ const parseNalUnit = (nalUnit: ArrayBuffer): void => {
     const dv = new DataView(nalUnit);
     const header = dv.getUint8(0);
     const nalHeader = parseNALHeader(header);
+    const start = dv.byteOffset + 1;
+    const end = start + nalUnit.byteLength - 1;
+    const extractedRbspData = discardEmulationPreventionBytesFromRBSP(nalUnit.slice(start, end));
+    const temp = rbsp_trailing_bits(extractedRbspData);
+    if (nalHeader.type === 10) {
+        console.warn("END OF SEQUENCE");
+    }
     if (nalHeader.type === 1 || nalHeader.type === 5) {
-        const start = dv.byteOffset + 1;
-        const end = start + nalUnit.byteLength - 1;
-        const extractedRbspData = discardEmulationPreventionBytesFromRBSP(nalUnit.slice(start, end));
+        // NOTE (benjamintooofer@gmail.com): Make sure to omit the trailing rbsp bit
         slice_layer_without_partitioning_rbsp(extractedRbspData, nalHeader.type);
     }
 
@@ -96,9 +126,8 @@ const parseNalUnit = (nalUnit: ArrayBuffer): void => {
 export const parseNALUnits = (segment: ArrayBuffer): void => {
     const mdats = findBox<IMDAT>(MDAT.TYPE, segment);
     const MDATBox = mdats[0].data;
-
     let offset = 0;
-    const index = 0;
+
     while (offset < MDATBox.byteLength) {
         const length = MDATBox.getUint32(offset);
         offset += 4;
@@ -106,13 +135,8 @@ export const parseNALUnits = (segment: ArrayBuffer): void => {
         const end = start + length;
         const nalUnit = MDATBox.buffer.slice(start, end);
         parseNalUnit(nalUnit);
-        // const header = MDATBox.getUint8(offset);
-        // parseNALHeader(header);
         offset += length;
-        // REMOVE THIS
-        // if (index > 2){
-        //     break;
-        // }
-        // index++;
     }
+
+    
 };
