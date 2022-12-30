@@ -18,7 +18,7 @@
     "@typescript-eslint/parser": "^2.20.0",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
-    "mocha": "^7.1.0",
+    "mocha": "^10.2.0",
     "nyc": "^15.0.0",
     "ts-loader": "^6.2.1",
     "ts-node": "^8.6.2",
